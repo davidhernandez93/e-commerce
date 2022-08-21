@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function(){
     let submitButton = document.getElementById('cerrarLogin');
     submitButton.addEventListener('click', function(event){
         if(mailInput.value !='' && pwInput.value !=''){
-
+            location.replace('home.html');
             loginOverlay.classList.add('hidden');
             loginBox.classList.add('hidden');
             event.preventDefault();
@@ -22,8 +22,7 @@ document.addEventListener('DOMContentLoaded', function(){
 })
 function handleCredentialResponse(response) {
   console.log("Encoded JWT ID token: " + response.credential);
-  loginOverlay.classList.add('hidden');
-  loginBox.classList.add('hidden');
+  location.replace('home.html');
   }
   window.onload = function () {
   google.accounts.id.initialize({
@@ -35,6 +34,4 @@ function handleCredentialResponse(response) {
       { theme: "outline", size: "large" }  // customization attributes
   );
   google.accounts.id.prompt(); // also display the One Tap dialog
-  loginOverlay.classList.add('hidden');
-  loginBox.classList.add('hidden');
 }
