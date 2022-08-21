@@ -12,8 +12,7 @@ document.addEventListener('DOMContentLoaded', function(){
     submitButton.addEventListener('click', function(event){
         if(mailInput.value !='' && pwInput.value !=''){
             location.replace('home.html');
-            loginOverlay.classList.add('hidden');
-            loginBox.classList.add('hidden');
+
             event.preventDefault();
         }
         
