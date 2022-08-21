@@ -6,8 +6,6 @@ document.addEventListener('DOMContentLoaded', function(){
     let pwInput = document.getElementById('pwInput');
     
 
-    //agrega la class hidden con display:none!important al contenedor con el login.
-    // no funciona con el evento submit.
     let submitButton = document.getElementById('cerrarLogin');
     submitButton.addEventListener('click', function(event){
         if(mailInput.value !='' && pwInput.value !=''){
