@@ -1,17 +1,18 @@
 document.addEventListener('DOMContentLoaded', function(){
 
-    let loginOverlay = document.getElementById('overlay');
-    let loginBox = document.getElementById('loginBox');
+
     let mailInput = document.getElementById('mailInput');
     let pwInput = document.getElementById('pwInput');
-    
-
     let submitButton = document.getElementById('cerrarLogin');
+
     submitButton.addEventListener('click', function(event){
         if(mailInput.value !='' && pwInput.value !=''){
-            location.replace('home.html');
 
+            localStorage.setItem('nombre', mailInput.value);
+            nombreLogin = localStorage.getItem('nombre');
+            location.replace('index.html');
             event.preventDefault();
+
         }
         
     })
