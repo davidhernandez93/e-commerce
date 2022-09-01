@@ -6,6 +6,7 @@ let currentSortCriteria = undefined;
 let minCount = undefined;
 let maxCount = undefined;
 
+
 function sortCategories(criteria, array){
     let result = [];
     if (criteria === ORDER_ASC_BY_NAME)
@@ -36,9 +37,13 @@ function sortCategories(criteria, array){
 }
 
 function setCatID(id) {
+
     localStorage.setItem("catID", id);
-    window.location = "products.html"
+    window.location = "products.html";
+
+
 }
+
 
 function showCategoriesList(){
 

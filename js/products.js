@@ -1,7 +1,9 @@
-let objectCars = {}
+let objectProduct = {}
 
-function showCarsList(object){
+
+function showProductsList(object){
     let htmlContentToAppend = "";
+
 
     for(let i of object.products){ 
         htmlContentToAppend += `
@@ -26,12 +28,18 @@ function showCarsList(object){
         document.getElementById("cat-list-container").innerHTML = htmlContentToAppend; 
     }
 }
+
 document.addEventListener("DOMContentLoaded", function(e){
-    getJSONData(AUTOS_URL).then(function(resultObj){
+    getJSONData(PRODUCTS_URL).then(function(resultObj){
         if (resultObj.status === "ok")
         {
-            objectCars = resultObj.data;
-            showCarsList(objectCars);
+            objectProduct = resultObj.data;
+            showProductsList(objectProduct);
+
+            //se agrega el nombre de la categoria a la pagina.
+            localStorage.setItem('catName', objectProduct.catName);
+            let catName = document.getElementById('catProd');
+            catName.innerHTML += `<strong>${localStorage.getItem('catName')}</strong>`
         }
     });
 });
