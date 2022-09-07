@@ -37,10 +37,31 @@
     </div>
   </nav>
   <main>
-    <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
-      </div>
+    <div id="prod-list-container" class="container mt-4"></div>
+    <div id="prod-images-container" class="container d-flex"></div>
+    <div id="prod-comments-container" class="container mt-4">
+
+      <h3>Comentarios</h3>
+
+    </div>
+    <div id="addComment" class="container mt-4">
+
+      <h4>Comentar</h4>
+      <form action="" id="form" class="col-6">
+        
+        <label for="comentario" class="form-label"></label>
+        <textarea class="form-control col-6 mb-3" name="comment" id="comment" rows="3" placeholder="Dejanos tu opinión" required></textarea>
+
+        <label for="score" class="form-label col-6 ">Tu puntuación</label>
+        <select class="form-control mb-3" name="score" id="score">
+          <option value="5">⭐⭐⭐⭐⭐ - Me encanta!</option>
+          <option value="4">⭐⭐⭐⭐ - Me gusta</option>
+          <option value="3">⭐⭐⭐ - Cumple su función </option>
+          <option value="2">⭐⭐ - Meh</option>
+          <option value="1">⭐ - Malo</option>
+        </select>
+        <button type="submit" class="btn btn-outline-dark">Enviar</button>
+      </form>
     </div>
   </main>
   <footer class="text-muted">

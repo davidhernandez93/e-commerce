@@ -212,3 +212,9 @@ a.custom-card:hover {
 .hidden{
   display:none!important;
 }
+.rating__star {
+  color: gold;
+}
+textarea { 
+  resize:none; 
+}

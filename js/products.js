@@ -9,6 +9,13 @@ let currentSortCriteria = undefined;
 let minCount = undefined;
 let maxCount = undefined;
 
+
+//guarda el id del producto seleccionado y redirecciona a la pagina con la informacion del producto
+function setProdId(id){
+    localStorage.setItem('prodId', id);
+    window.location ='product-info.html';
+}
+
 function showProductsList(){
 
     let htmlContentToAppend = "";
@@ -17,7 +24,7 @@ function showProductsList(){
         if (((minCount == undefined) || (minCount != undefined && parseInt(product.cost) >= minCount)) &&
             ((maxCount == undefined) || (maxCount != undefined && parseInt(product.cost) <= maxCount))){
             htmlContentToAppend += `
-            <div class="list-group-item list-group-item-action">
+            <div onclick="setProdId(${product.id})" class="list-group-item list-group-item-action">
                 <div class="row">
                     <div class="col-3">
                         <img src="` + product.image + `" alt="product image" class="img-thumbnail">
