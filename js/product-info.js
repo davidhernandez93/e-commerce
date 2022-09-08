@@ -99,5 +99,60 @@ document.addEventListener("DOMContentLoaded", function(e){
             showProductComments(productComments);
         }
     });
+    
 
 });
+
+//desafiate
+
+let form = document.getElementById('form');
+let formBtn = document.getElementById('formBtn')
+let formCommentBox = document.getElementById('comment');
+let formScore = document.getElementById('score');
+let nombre = localStorage.getItem('nombre');
+let commentOfUser = JSON.parse(localStorage.getItem("listOfComments"));
+let newComment ='';
+
+if (commentOfUser === null) {
+    commentOfUser = [] 
+};
+
+function saveCommentOfUser (){
+
+    let formSubmitted = {user: nombre, score: formScore.value, description: formCommentBox.value};
+    localStorage.setItem("form", JSON.stringify(formSubmitted));
+    commentOfUser.push(formSubmitted);
+    localStorage.setItem('listOfComments', JSON.stringify(commentOfUser));
+    console.log(localStorage.getItem('form'));
+    console.log(localStorage.getItem('listOfComments'))
+    
+}
+
+function showCommentOfUser(){
+    
+    newComment ='';
+    for(let item of commentOfUser){
+
+        newComment = `
+        <div id="divComments" class="list-group-item">
+            <strong>${item.user}</strong>
+            -
+            <span id='rating'>${rating(item.score)}</span>
+            </br>
+            ${item.description}
+        </div>
+        `
+        formCommentBox.value = '';
+
+    }
+        
+    document.getElementById("prod-comments-container").innerHTML += newComment;
+
+}
+formBtn.addEventListener('click', function(e){
+    e.preventDefault();
+    saveCommentOfUser();
+    showCommentOfUser();
+})
+
+
