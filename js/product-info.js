@@ -2,6 +2,7 @@ let productInfo = {}
 let products = [];
 let productImages = [];
 let productComments = [];
+let productRelated = [];
 
 function showProductInfo(){
 
@@ -47,19 +48,19 @@ function showProductComments(){
     let commentToAppend = '';
     for(let data of productComments){
 
-    commentToAppend += `
-    <div id="divComments" class="list-group-item">
+        commentToAppend += `
+        <div id="divComments" class="list-group-item">
 
-        <strong>${data.user}</strong>
-        -
-        ${data.dateTime}
-        -
-        <span id='rating'>${rating(data.score)}</span>
-        </br>
-        ${data.description}
-        
-    </div>
-    `
+            <strong>${data.user}</strong>
+            -
+            ${data.dateTime}
+            -
+            <span id='rating'>${rating(data.score)}</span>
+            </br>
+            ${data.description}
+            
+        </div>
+        `
     }
     document.getElementById("prod-comments-container").innerHTML += commentToAppend;
 
@@ -67,12 +68,9 @@ function showProductComments(){
 
 function rating(score){
 
-    //define cuantas estrellas vacias van a quedar.   
     let blankStars = (5 - score);
     let voidStar = `<i class="rating__star far fa-star"></i>`.repeat(blankStars);
-    //define cuantas estrellas tiene de puntaje
     let fullStar = `<i class="rating__star fas fa-star"></i>`.repeat(score);
-    //se muestran las estrellas vacias y rellenas concatenadas
     return fullStar + voidStar;    
 
 }
@@ -85,9 +83,12 @@ document.addEventListener("DOMContentLoaded", function(e){
         if (resultObj.status === "ok")
         {
             productInfo = resultObj.data;
+            console.log(productInfo)
             productImages = productInfo.images;
-            showProductInfo(productInfo);
-            showProductImages(productImages);
+            productRelated = productInfo.relatedProducts;
+            showProductInfo();
+            showProductImages();
+            showRelated();
         }
     });
     //fetch a los objetos con los comentarios de los productos.
@@ -103,7 +104,32 @@ document.addEventListener("DOMContentLoaded", function(e){
 
 });
 
-//desafiate
+function setRelId(id){
+    localStorage.setItem('prodId', id);
+    window.location ='product-info.html';
+}
+
+function showRelated(){
+    let productToAppend = '';
+
+    for (let product of productRelated){
+
+        productToAppend += `
+        <div onclick="setRelId(${product.id})" class="img-thumbnail">
+            <img src="${product.image}" alt="product image" class='w-100'>
+            <p>${product.name}</p>
+        </div>
+        `
+        
+        
+    }
+    
+    document.getElementById('prodRelated-list-container').innerHTML += productToAppend;
+
+}
+
+
+//desafiate Entrega 3
 
 let form = document.getElementById('form');
 let formBtn = document.getElementById('formBtn')
@@ -130,7 +156,7 @@ function saveCommentOfUser (){
 
 function showCommentOfUser(){
     
-    newComment ='';
+    let newComment ='';
     for(let item of commentOfUser){
 
         newComment = `
@@ -156,3 +182,4 @@ formBtn.addEventListener('click', function(e){
 })
 
 
+//Fin desafiate entrega 3

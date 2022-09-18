@@ -37,6 +37,20 @@ function nombreNavBar(){
 nombreNavBar();
 
 
+function cerrarSesion (){
+
+  localStorage.setItem('nombre', '');
+  location.replace('login.html');
+
+}
+
+document.getElementById('signOut').addEventListener('click', function(){
+
+  cerrarSesion();
+
+})
+
+
 let getJSONData = function(url){
     let result = {};
     return fetch(url)
