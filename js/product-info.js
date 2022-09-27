@@ -22,10 +22,9 @@ function showProductInfo(){
     <p><strong>Imágenes ilustrativas</strong></p>
     
     `
-    
     document.getElementById("prod-list-container").innerHTML += htmlContentToAppend;
-    
 }
+
 function showProductImages(){
 
     let imagesToAppend = '';
@@ -33,15 +32,16 @@ function showProductImages(){
     for (let image of productImages){
 
         imagesToAppend = `
-        <div>
-            <img src="` + image + `" alt="product image" class="img-thumbnail">
+        <div class='carousel-item'>
+            <img src="` + image + `" alt="product image" class="img-thumbnail d-block w-100">
         </div>
         `
         
         document.getElementById("prod-images-container").innerHTML += imagesToAppend;
 
     }
-    
+    let firstItem = document.getElementsByClassName('carousel-item')[0];
+    firstItem.classList.add(`active`);
 }
 
 function showProductComments(){
