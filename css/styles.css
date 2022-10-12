@@ -218,3 +218,7 @@ a.custom-card:hover {
 textarea { 
   resize:none; 
 }
+
+input{
+  width: 5em!important;
+}
