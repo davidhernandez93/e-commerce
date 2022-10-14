@@ -219,6 +219,9 @@ textarea {
   resize:none; 
 }
 
-input{
+#itemCount{
   width: 5em!important;
+}
+table{
+  table-layout: fixed;
 }
