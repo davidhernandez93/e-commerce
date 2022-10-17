@@ -25,6 +25,7 @@ function showProductInfo(){
     document.getElementById("prod-list-container").innerHTML += htmlContentToAppend;
 }
 
+
 function showProductImages(){
 
     let imagesToAppend = '';
@@ -89,6 +90,7 @@ document.addEventListener("DOMContentLoaded", function(e){
             showProductInfo();
             showProductImages();
             showRelated();
+            buy()
         }
     });
     //fetch a los objetos con los comentarios de los productos.
@@ -183,3 +185,37 @@ formBtn.addEventListener('click', function(e){
 
 
 //Fin desafiate entrega 3
+
+let btnBuy = document.createElement('button');
+btnBuy.innerHTML = 'Comprar';
+btnBuy.setAttribute('class', 'btn btn-success btn-lg position-absolute end-50');
+btnBuy.setAttribute('id', 'buyBtn');
+document.getElementById('prod-list-container').appendChild(btnBuy);
+
+function buy(){
+    let buttonBuy = document.getElementById('buyBtn');
+    buttonBuy.addEventListener('click', function(){
+        saveitemsInCart();
+    })
+}
+
+
+let itemsInCart = JSON.parse(localStorage.getItem("listOfItems"));
+if (itemsInCart === null) {
+    itemsInCart = [] 
+};
+function saveitemsInCart (){
+
+    let objectItem = {
+        id: productInfo.id,
+        count: 1,
+        name: productInfo.name,
+        unitCost: productInfo.cost,
+        currency: productInfo.currency,
+        image: productInfo.images[0],
+    }
+    localStorage.setItem("object", JSON.stringify(objectItem));
+    itemsInCart.push(objectItem);
+    localStorage.setItem('listOfItems', JSON.stringify(itemsInCart));
+    
+}
