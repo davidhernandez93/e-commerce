@@ -6,10 +6,11 @@ let productRelated = [];
 
 function showProductInfo(){
 
+    document.getElementById('prodName').innerHTML = `${productInfo.name}`;
+
     let htmlContentToAppend = "";
 
     htmlContentToAppend += `
-    <h2>${productInfo.name}</h2>
     <hr>
     <p><strong>Precio</strong></p>
     <p>${productInfo.cost}</p>
@@ -188,9 +189,9 @@ formBtn.addEventListener('click', function(e){
 
 let btnBuy = document.createElement('button');
 btnBuy.innerHTML = 'Comprar';
-btnBuy.setAttribute('class', 'btn btn-success btn-lg position-absolute end-50');
+btnBuy.setAttribute('class', 'btn btn-success btn-lg');
 btnBuy.setAttribute('id', 'buyBtn');
-document.getElementById('prod-list-container').appendChild(btnBuy);
+document.getElementById('btnDiv').appendChild(btnBuy);
 
 function buy(){
     let buttonBuy = document.getElementById('buyBtn');
