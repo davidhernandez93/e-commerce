@@ -215,7 +215,6 @@ function saveitemsInCart (){
         currency: productInfo.currency,
         image: productInfo.images[0],
     }
-    localStorage.setItem("object", JSON.stringify(objectItem));
     itemsInCart.push(objectItem);
     localStorage.setItem('listOfItems', JSON.stringify(itemsInCart));
     
