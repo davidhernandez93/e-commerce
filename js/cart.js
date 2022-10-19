@@ -40,6 +40,20 @@ function showCartContent(){
             
         })
         document.getElementById(`count-${item.id}`).appendChild(inputCount);
+        
+        let tdDelete = document.createElement('td');
+        tdDelete.setAttribute(`class`, `text-center`)
+        let btnDelete = document.createElement('button');
+        btnDelete.setAttribute(`class`,`btn btn-danger`)
+        btnDelete.innerHTML=`
+            <i class="fa fa-trash" aria-hidden="true"></i>
+        `;
+        btnDelete.addEventListener('click', function(){
+            this.parentElement.parentElement.remove()
+        })
+        tdDelete.appendChild(btnDelete);
+        tRow.appendChild(tdDelete)
         }
+        
     }
 
