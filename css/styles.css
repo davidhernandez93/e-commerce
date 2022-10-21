@@ -228,3 +228,17 @@ table{
 td{
   align-items: center;
 }
+.container{
+  max-width: 750px!important;
+}
+@media (max-width:576px){
+  input{
+    width: 3.1em!important;
+  }
+  table{
+    font-size: 0.7rem;
+  }
+  .btn {
+    font-size: 0.5rem;
+  }
+}

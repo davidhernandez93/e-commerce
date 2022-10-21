@@ -1,19 +1,19 @@
 const cartUser = '25801.json';
 let cartContent = [];
 let itemsInCart = JSON.parse(localStorage.getItem("listOfItems"));
+let percentage = 0.15;
 
 if(itemsInCart === null){
     itemsInCart = [];
 };
 
 fetch(CART_INFO_URL + cartUser).then(response => response.json()).then(data => {
-
     cartContent = data.articles;
     cartContent = cartContent.concat(itemsInCart);
     showCartContent();
-    showSubtotal();
+    showCosts();
+    selectedRate();
     addDelete();
-
 });
 
 function showCartContent(){
@@ -38,12 +38,71 @@ function showCartContent(){
         inputCount.addEventListener('input', function(){
             document.getElementById('sub-'+item.id).innerHTML = 'USD ' + calcSubtotal(item.currency, item.unitCost, inputCount.value);
             showSubtotal()
-            
         })
         document.getElementById(`count-${item.id}`).appendChild(inputCount);
-
     }
+}
+
+function conversion (currency, cost){
+    if(currency==='UYU'){
+        currency='USD';
+        cost = Math.round(cost / 40);
+    }
+    let unitCost = Math.round(cost);    
+    return unitCost;
+}
     
+function calcSubtotal(currency, cost, input){
+    if(currency==='UYU'){
+        currency = 'USD';
+        cost = Math.round(cost / 40);
+    }
+    let prodSubtotal = Math.round(cost * input) ;
+    return prodSubtotal;
+}
+
+function showCosts(){
+    let itemRows = document.getElementsByClassName('tRow');
+    let subTotal = 0;
+    for(let i = 0; i<itemRows.length; i++){
+        let itemRow = itemRows[i];
+        let price = parseFloat(itemRow.getElementsByClassName('unitCost')[0].innerText.replace('USD ', ''));
+        let quantity = parseFloat(itemRow.getElementsByClassName('inputQuantity')[0].value);
+        subTotal += parseInt(price * quantity);
+    }
+    let divSubtotal = document.getElementById('divSubtotal');
+    divSubtotal.innerHTML = `<strong>Total de la compra: USD ${subTotal}</strong>`;
+    
+    let costSubtotal = document.getElementById('productCostText');
+    costSubtotal.innerHTML = `USD ${subTotal}`;
+    costSubtotal.dataset.sub = Number(subTotal);
+
+    let costPercentage = document.getElementById('percentageText');
+    costPercentage.innerHTML = `USD ${parseInt(subTotal * percentage)}`
+    costPercentage.dataset.percentage = parseInt(Number(subTotal * percentage));
+
+    let totalCost = (Number(costSubtotal.dataset.sub) + Number(costPercentage.dataset.percentage));
+    let totalCostHTML = document.getElementById('totalCostText');
+    totalCostHTML.innerHTML = `USD ${totalCost}`;
+}
+
+let premiumRate = document.getElementById('radio1');
+let expressRate = document.getElementById('radio2');
+let standardRate = document.getElementById('radio3');
+
+function selectedRate (){  
+    premiumRate.addEventListener('change', function(){
+        percentage = 0.15;
+        showCosts()
+    });
+    expressRate.addEventListener('change', function(){
+        percentage = 0.07;
+        showCosts()
+    });
+    standardRate.addEventListener('change', function(){
+        percentage = 0.05;
+        showCosts()
+    });
 }
 
 function addDelete(){
@@ -66,37 +125,4 @@ function addDelete(){
 
         row[i].append(tdDelete)
     }
-}
-
-function conversion (currency, cost){
-    if(currency==='UYU'){
-        currency='USD';
-        cost = Math.round(cost / 40);
-    }
-    let unitCost = Math.round(cost);    
-    return unitCost;
-}
-    
-function calcSubtotal(currency, cost, input){
-    if(currency==='UYU'){
-        currency = 'USD';
-        cost = Math.round(cost / 40);
-    }
-    let prodSubtotal =Math.round(cost * input) ;
-    return prodSubtotal;
-
-}
-
-function showSubtotal(){
-    let itemRows = document.getElementsByClassName('tRow');
-    let subTotal = 0;
-    for(let i = 0; i<itemRows.length; i++){
-        let itemRow = itemRows[i];
-        let price = parseFloat(itemRow.getElementsByClassName('unitCost')[0].innerText.replace('USD ', ''));
-        let quantity = parseFloat(itemRow.getElementsByClassName('inputQuantity')[0].value);
-        subTotal += (price * quantity);
-
-    }
-    let divSubtotal = document.getElementById('divSubtotal');
-    divSubtotal.innerHTML = `<strong>Total de la compra: USD ${subTotal}</strong>`;
 }
