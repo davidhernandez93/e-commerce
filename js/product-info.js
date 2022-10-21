@@ -85,7 +85,6 @@ document.addEventListener("DOMContentLoaded", function(e){
         if (resultObj.status === "ok")
         {
             productInfo = resultObj.data;
-            console.log(productInfo)
             productImages = productInfo.images;
             productRelated = productInfo.relatedProducts;
             showProductInfo();
@@ -196,7 +195,12 @@ document.getElementById('btnDiv').appendChild(btnBuy);
 function buy(){
     let buttonBuy = document.getElementById('buyBtn');
     buttonBuy.addEventListener('click', function(){
-        saveitemsInCart();
+        if(!isInCart()){
+            saveitemsInCart();
+        }else{
+            buttonBuy.setAttribute(`class`, `btn btn-danger`);
+            buttonBuy.innerHTML=`En el carrito`;
+        }
     })
 }
 
@@ -219,3 +223,17 @@ function saveitemsInCart (){
     localStorage.setItem('listOfItems', JSON.stringify(itemsInCart));
     
 }
+
+let prodId = Number(localStorage.getItem('prodId'));
+console.log(prodId)
+
+function isInCart() {
+    for (let item of itemsInCart) {
+        console.log(item);
+      if (item.id == localStorage.getItem('prodId')) {
+        return true;
+      }
+    }
+    return false;
+}
+isInCart();
