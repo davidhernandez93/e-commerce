@@ -12,8 +12,8 @@ fetch(CART_INFO_URL + cartUser).then(response => response.json()).then(data => {
     cartContent = cartContent.concat(itemsInCart);
     showCartContent();
     showCosts();
-    selectedRate();
     addDelete();
+    selectedRate();
 });
 
 function showCartContent(){
@@ -37,7 +37,7 @@ function showCartContent(){
         
         inputCount.addEventListener('input', function(){
             document.getElementById('sub-'+item.id).innerHTML = 'USD ' + calcSubtotal(item.currency, item.unitCost, inputCount.value);
-            showSubtotal()
+            showCosts()
         })
         document.getElementById(`count-${item.id}`).appendChild(inputCount);
     }
@@ -74,15 +74,15 @@ function showCosts(){
     divSubtotal.innerHTML = `<strong>Total de la compra: USD ${subTotal}</strong>`;
     
     let costSubtotal = document.getElementById('productCostText');
-    costSubtotal.innerHTML = `USD ${subTotal}`;
     costSubtotal.dataset.sub = Number(subTotal);
+    costSubtotal.innerHTML = `USD ${costSubtotal.dataset.sub}`;
 
     let costPercentage = document.getElementById('percentageText');
-    costPercentage.innerHTML = `USD ${parseInt(subTotal * percentage)}`
     costPercentage.dataset.percentage = parseInt(Number(subTotal * percentage));
+    costPercentage.innerHTML = `USD ${costPercentage.dataset.percentage}`
 
-    let totalCost = (Number(costSubtotal.dataset.sub) + Number(costPercentage.dataset.percentage));
     let totalCostHTML = document.getElementById('totalCostText');
+    let totalCost = parseInt((Number(costSubtotal.dataset.sub) + Number(costPercentage.dataset.percentage)));
     totalCostHTML.innerHTML = `USD ${totalCost}`;
 }
 
