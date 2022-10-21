@@ -41,7 +41,7 @@
       </div>
     </div>
   </nav>
-  <main>
+  <main id="mainCart">
     <div class="container px-5">
       <h2 class="my-3 text-center">Carrito de compras</h2>
       <h4 class="fw-light mb-3">Artículos a comprar</h4>
@@ -126,8 +126,47 @@
         </ul>
       </div>
       <hr class="mb-4">
+      <h4 class="mb-3">Forma de pago</h4>
+      <span>No ha seleccionado</span><span id="modalLink">Seleccionar</span>
     </div>
-      
+
+    <div id="modalBox" class="hidden px-0">
+      <button class="close-modal btn btn-primary">Cerrar</button>
+      <h4 class="px-5">Forma de pago</h4>
+      <hr class="w-100 mx-0 mb-3">
+      <form class="form-group mx-4">
+        <div class="col-12">
+          <input type="radio" name="paymentOption" id="creditCard">
+          <label for="creditCard" class="form-check-label">Tarjeta de crédito</label>
+          <hr>
+          <div class="row py-2">
+            <div class="col-sm-12 col-md-5">
+              <label for="cardNumber" class="form-check-label">Número de tarjeta</label>
+              <input type="text" name="cardNumber" id="cardNumber" class="form-control w-100" placeholder="XXXX-XXXX-XXXX-XXXX">
+            </div>
+            <div class="col-sm-12 col-md-5">
+              <label for="cardCode" class="form-check-label">Número de seg.</label>
+              <input type="number" name="cardCode" id="cardCode" class="form-control w-50" placeholder="CCV">
+            </div>
+            <div class="col-sm-12 col-md-5">
+              <label for="cardDue" class="form-check-label">Vencimiento (MM/AA)</label>
+              <input type="month" name="cardDue" id="cardDue" class="form-control w-100" placeholder="MM-AA">
+            </div>
+          </div>
+        </div>
+        <div class="col-12 pt-3">
+          <input type="radio" name="paymentOption" id="bankWire">
+          <label for="bankWire" class="form-check-label">Transferencia bancaria</label>
+          <hr>
+          <div class="col-sm-12 col-md-5">
+            <label for="bankAccount" class="form-check-label">Número de cuenta</label>
+            <input type="number" name="bankAccount" id="bankAccount" class="form-control w-100" placeholder="Cuenta bancaria">
+          </div>
+        </div>
+      </form>
+    </div>
+    
+    <div id='overlay' class="overlay hidden"></div>
   </main>
   <footer class="text-muted">
     <div class="container">

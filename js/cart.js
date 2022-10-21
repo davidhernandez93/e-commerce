@@ -126,3 +126,30 @@ function addDelete(){
         row[i].append(tdDelete)
     }
 }
+function openModal(){
+    document.getElementById('modalLink').addEventListener('click', function(){
+        document.getElementById('modalBox').classList.remove('hidden');
+        document.getElementById('overlay').classList.remove('hidden');
+    })
+}
+openModal();
+
+function addHidden(){
+    document.getElementById('modalBox').classList.add('hidden');
+    document.getElementById('overlay').classList.add('hidden');
+}
+
+function closeModal(){
+    document.querySelector('.close-modal').addEventListener('click', function(){
+        addHidden();
+    })
+    document.querySelector('.overlay').addEventListener('click', function(){
+        addHidden();
+    })
+    document.addEventListener('keyup', function(e){
+        if(e.key==='Escape' && !document.getElementById('modalBox').classList.contains('hidden')){
+            addHidden();
+        }
+    })
+}
+closeModal();
