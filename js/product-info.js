@@ -26,7 +26,6 @@ function showProductInfo(){
     document.getElementById("prod-list-container").innerHTML += htmlContentToAppend;
 }
 
-
 function showProductImages(){
 
     let imagesToAppend = '';
@@ -38,9 +37,7 @@ function showProductImages(){
             <img src="` + image + `" alt="product image" class="img-thumbnail d-block w-100">
         </div>
         `
-        
         document.getElementById("prod-images-container").innerHTML += imagesToAppend;
-
     }
     let firstItem = document.getElementsByClassName('carousel-item')[0];
     firstItem.classList.add(`active`);
@@ -65,16 +62,13 @@ function showProductComments(){
         `
     }
     document.getElementById("prod-comments-container").innerHTML += commentToAppend;
-
 };
 
 function rating(score){
-
     let blankStars = (5 - score);
     let voidStar = `<i class="rating__star far fa-star"></i>`.repeat(blankStars);
     let fullStar = `<i class="rating__star fas fa-star"></i>`.repeat(score);
     return fullStar + voidStar;    
-
 }
 
 document.addEventListener("DOMContentLoaded", function(e){
@@ -102,8 +96,6 @@ document.addEventListener("DOMContentLoaded", function(e){
             showProductComments(productComments);
         }
     });
-    
-
 });
 
 function setRelId(id){
@@ -122,16 +114,9 @@ function showRelated(){
             <p>${product.name}</p>
         </div>
         `
-        
-        
     }
-    
     document.getElementById('prodRelated-list-container').innerHTML += productToAppend;
-
 }
-
-
-//desafiate Entrega 3
 
 let form = document.getElementById('form');
 let formBtn = document.getElementById('formBtn')
@@ -146,14 +131,10 @@ if (commentOfUser === null) {
 };
 
 function saveCommentOfUser (){
-
     let formSubmitted = {user: nombre, score: formScore.value, description: formCommentBox.value};
     localStorage.setItem("form", JSON.stringify(formSubmitted));
     commentOfUser.push(formSubmitted);
     localStorage.setItem('listOfComments', JSON.stringify(commentOfUser));
-    console.log(localStorage.getItem('form'));
-    console.log(localStorage.getItem('listOfComments'))
-    
 }
 
 function showCommentOfUser(){
@@ -171,20 +152,14 @@ function showCommentOfUser(){
         </div>
         `
         formCommentBox.value = '';
-
     }
-        
     document.getElementById("prod-comments-container").innerHTML += newComment;
-
 }
 formBtn.addEventListener('click', function(e){
     e.preventDefault();
     saveCommentOfUser();
     showCommentOfUser();
 })
-
-
-//Fin desafiate entrega 3
 
 let btnBuy = document.createElement('button');
 btnBuy.innerHTML = 'Comprar';
@@ -196,14 +171,16 @@ function buy(){
     let buttonBuy = document.getElementById('buyBtn');
     buttonBuy.addEventListener('click', function(){
         if(!isInCart()){
+            buttonBuy.setAttribute(`class`, `btn btn-primary`);
+            buttonBuy.innerHTML = `Gracias por su compra!`
             saveitemsInCart();
+            
         }else{
             buttonBuy.setAttribute(`class`, `btn btn-danger`);
             buttonBuy.innerHTML=`En el carrito`;
         }
     })
 }
-
 
 let itemsInCart = JSON.parse(localStorage.getItem("listOfItems"));
 if (itemsInCart === null) {
@@ -224,12 +201,8 @@ function saveitemsInCart (){
     
 }
 
-let prodId = Number(localStorage.getItem('prodId'));
-console.log(prodId)
-
 function isInCart() {
     for (let item of itemsInCart) {
-        console.log(item);
       if (item.id == localStorage.getItem('prodId')) {
         return true;
       }
