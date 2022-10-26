@@ -288,8 +288,22 @@ td{
   cursor: pointer;
 }
 
-
 .missingData{
   font-size: small;
   color: red;
+}
+
+.successOverlay{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: auto ;
+  background-color: rgb(171, 211, 177);
+  color: green;
+  white-space: nowrap;
+  padding: 3rem 9rem;
+  border-radius: 5px;
+  box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.3);
+  z-index: 10;  
 }
