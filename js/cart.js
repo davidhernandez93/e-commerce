@@ -153,3 +153,70 @@ function closeModal(){
     })
 }
 closeModal();
+
+let btnPurchase = document.getElementById('btnPurchase');
+let street = document.getElementById('inputStreet');
+let number = document.getElementById('inputNumber');
+let corner = document.getElementById('inputCorner');
+let credit = document.getElementById('creditCard');
+let bankWire = document.getElementById('bankWire');
+
+btnPurchase.addEventListener('click', function(e){
+    e.preventDefault();
+    isEmpty(street);
+    isEmpty(number);
+    isEmpty(corner);
+    notChecked(credit, bankWire);
+})
+
+function isEmpty(input){
+    if(!input.value){
+        if(input.id==='inputStreet'){
+            document.getElementById('pStreet').classList.remove('hidden');
+            document.getElementById('inputStreet').style.borderColor = 'red';
+        }else if(input.id==='inputNumber'){
+            document.getElementById('pNumber').classList.remove('hidden');
+            document.getElementById('inputNumber').style.borderColor = 'red';
+        }
+        else if(input.id==='inputCorner'){
+            document.getElementById('pCorner').classList.remove('hidden');
+            document.getElementById('inputCorner').style.borderColor = 'red';
+        }    
+    }
+    else{
+        document.getElementById('inputStreet').style.borderColor = '#ced4da';
+        document.getElementById('inputNumber').style.borderColor = '#ced4da';document.getElementById('inputCorner').style.borderColor = '#ced4da';
+        document.getElementById('pStreet').classList.add('hidden');
+        document.getElementById('pNumber').classList.add('hidden');
+        document.getElementById('pCorner').classList.add('hidden');
+    }    
+}
+function notChecked (option1, option2){
+    if(!option1.checked && !option2.checked){
+        document.getElementById('spanMissing').innerText = 'No se ha seleccionado una forma de pago'
+        document.getElementById('spanMissing').style.color = 'red';
+    }
+    else{
+        document.getElementById('spanMissing').style.color = '#212529';
+    }
+    if(option1.checked){
+        document.getElementById('spanMissing').innerText = `Tarjeta de crédito`
+    }else if(option2.checked){
+        document.getElementById('spanMissing').innerText = `Transferencia bancaria`
+    }
+
+}
+
+credit.addEventListener('change', function(){
+    document.getElementById('bankAccount').disabled = true;
+    document.getElementById('cardNumber').disabled = false;
+    document.getElementById('cardCode').disabled = false;
+    document.getElementById('cardDue').disabled = false;
+    
+})
+bankWire.addEventListener('change', function(){
+    document.getElementById('bankAccount').disabled = false;
+    document.getElementById('cardNumber').disabled = true;
+    document.getElementById('cardCode').disabled = true;
+    document.getElementById('cardDue').disabled = true;
+})

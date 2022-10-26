@@ -64,7 +64,7 @@
       <div id="divSubtotal" class="d-flex justify-content-end"><span><strong>Subtotal: $0</strong></span></div>
     </div>
     <div class="container px-5">
-      <form action="post">
+      <form action="">
         <h4 class="fw-light my-3">Tipo de envío</h4>
         <div class="col-12">
           <input type="radio" name="type" id="radio1">
@@ -89,45 +89,51 @@
         <div class="row align-items-center">
           <div class="col-md-6 col-12">
             <label for="street">Calle</label>
-            <input type="text" placeholder="Calle" class="form-control w-100">
+            <input id="inputStreet" type="text" placeholder="Calle" class="form-control w-100">
+            <p id="pStreet" class="missingData hidden">Ingresa una calle</p>
           </div>
           <div class="col-md-6 col-12 ">
             <label for="street">Número</label>
-            <input type="text" placeholder="Número" class="form-control w-50">
+            <input type="number" id="inputNumber" type="text" placeholder="Número" class="form-control w-50">
+            <p id="pNumber" class="missingData hidden">Ingresa un numero</p>
           </div>
           <div class="col-md-6 col-12 ">
             <label for="street">Esquina</label>
-            <input type="text" placeholder="Esquina" class="form-control w-100">
+            <input id="inputCorner" type="text" placeholder="Esquina" class="form-control w-100">
+            <p id="pCorner" class="missingData hidden">Ingresa una esquina</p>
           </div>
         </div>
+      
+        <hr class="mb-4">
+        <h4 class="mb-3">Costos</h4>
+        <div class="d-flex justify-content-center">
+          <ul class="list-group mb-3 col-10">
+            <li class="list-group-item d-flex justify-content-between lh-condensed">
+              <div>
+                <h6 class="my-0">Subtotal</h6>
+                <small class="text-muted">Costo unitario del producto por cantidad</small>
+              </div>
+              <span class="text-muted" id="productCostText">-</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between lh-condensed">
+              <div>
+                <h6 class="my-0">Porcentaje</h6>
+                <small class="text-muted">Según el tipo de envío</small>
+              </div>
+              <span class="text-muted" id="percentageText">-</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between">
+              <span>Total (USD)</span>
+              <strong id="totalCostText">-</strong>
+            </li>
+          </ul>
+        </div>
+        <hr class="mb-4">
+        <h4 class="mb-3">Forma de pago</h4>
+        <span id="spanMissing">No ha seleccionado</span><span id="modalLink">Seleccionar</span>
+
+        <input id="btnPurchase" type="submit" class="btn btn-primary btn-lg w-100 mt-3" value="Finalizar Compra"></input>
       </form>
-      <hr class="mb-4">
-      <h4 class="mb-3">Costos</h4>
-      <div class="d-flex justify-content-center">
-        <ul class="list-group mb-3 col-10">
-          <li class="list-group-item d-flex justify-content-between lh-condensed">
-            <div>
-              <h6 class="my-0">Subtotal</h6>
-              <small class="text-muted">Costo unitario del producto por cantidad</small>
-            </div>
-            <span class="text-muted" id="productCostText">-</span>
-          </li>
-          <li class="list-group-item d-flex justify-content-between lh-condensed">
-            <div>
-              <h6 class="my-0">Porcentaje</h6>
-              <small class="text-muted">Según el tipo de envío</small>
-            </div>
-            <span class="text-muted" id="percentageText">-</span>
-          </li>
-          <li class="list-group-item d-flex justify-content-between">
-            <span>Total (USD)</span>
-            <strong id="totalCostText">-</strong>
-          </li>
-        </ul>
-      </div>
-      <hr class="mb-4">
-      <h4 class="mb-3">Forma de pago</h4>
-      <span>No ha seleccionado</span><span id="modalLink">Seleccionar</span>
     </div>
 
     <div id="modalBox" class="hidden px-0">
@@ -137,7 +143,7 @@
       <form class="form-group mx-4">
         <div class="col-12">
           <input type="radio" name="paymentOption" id="creditCard">
-          <label for="creditCard" class="form-check-label">Tarjeta de crédito</label>
+          <label id="creditCardLabel" for="creditCard" class="form-check-label">Tarjeta de crédito</label>
           <hr>
           <div class="row py-2">
             <div class="col-sm-12 col-md-5">
@@ -146,7 +152,7 @@
             </div>
             <div class="col-sm-12 col-md-5">
               <label for="cardCode" class="form-check-label">Número de seg.</label>
-              <input type="number" name="cardCode" id="cardCode" class="form-control w-50" placeholder="CCV">
+              <input type="number" name="cardCode" id="cardCode" class="form-control w-50" placeholder="CCV" min="001" max='999'>
             </div>
             <div class="col-sm-12 col-md-5">
               <label for="cardDue" class="form-check-label">Vencimiento (MM/AA)</label>
