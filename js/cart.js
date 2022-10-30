@@ -194,23 +194,23 @@ btnPurchase.addEventListener('click', function(e){
 function isEmpty(input){
     if(!input.value && input.id ==='inputStreet'){
         document.getElementById('pStreet').classList.remove('hidden');
-        document.getElementById('inputStreet').style.borderColor = 'red';
+        street.style.borderColor = 'red';
     }else if(input.value && input.id ==='inputStreet'){
-        document.getElementById('inputStreet').style.borderColor = '#ced4da';
+        street.style.borderColor = '#ced4da';
         document.getElementById('pStreet').classList.add('hidden');
     }
     if(!input.value && input.id ==='inputNumber'){
         document.getElementById('pNumber').classList.remove('hidden');
-        document.getElementById('inputNumber').style.borderColor = 'red';
+        number.style.borderColor = 'red';
     }else if(input.value && input.id ==='inputNumber'){
-        document.getElementById('inputNumber').style.borderColor = '#ced4da';
+        number.style.borderColor = '#ced4da';
         document.getElementById('pNumber').classList.add('hidden');
     }
     if(!input.value && input.id ==='inputCorner'){
         document.getElementById('pCorner').classList.remove('hidden');
-        document.getElementById('inputCorner').style.borderColor = 'red';
+        corner.style.borderColor = 'red';
     }else if(input.value && input.id ==='inputCorner'){
-        document.getElementById('inputCorner').style.borderColor = '#ced4da';
+        corner.style.borderColor = '#ced4da';
         document.getElementById('pCorner').classList.add('hidden');
     }
 }
@@ -226,9 +226,27 @@ function notChecked (option1, option2){
     }
     if(option1.checked){
         document.getElementById('spanMissing').innerText = `Tarjeta de crédito`;
-    }else if(option2.checked){
+    }
+    if(option2.checked){
         document.getElementById('spanMissing').innerText = `Transferencia bancaria`;
     }
+    if(option1.checked && (!document.getElementById('cardNumber').value || !document.getElementById('cardCode').value || !document.getElementById('cardDue').value)){
+        document.getElementById('spanMissing').innerText = 'Faltan completar datos'
+        document.getElementById('spanMissing').style.color = 'red';
+        checked = false;
+    }
+    if(option2.checked && !document.getElementById('bankAccount').value){
+        document.getElementById('spanMissing').innerText = 'Faltan completar datos'
+        document.getElementById('spanMissing').style.color = 'red';
+        checked = false;
+    }
+    if(option1.checked && document.getElementById('cardNumber').value && document.getElementById('cardCode').value && document.getElementById('cardDue').value){
+        checked = true;
+    }
+    if(option2.checked && document.getElementById('bankAccount').value){
+        checked = true;
+    }
+
 }
 
 function selectPayment(option1, option2, text){
@@ -238,13 +256,10 @@ function selectPayment(option1, option2, text){
     document.getElementById('cardDue').disabled = option2;
     document.getElementById('spanMissing').innerText = text;
     document.getElementById('spanMissing').style.color = '#212529';
-    checked = true;
 }
 credit.addEventListener('change', function(){
     selectPayment(true, false, 'Tarjeta de Crédito');
-    checked = true;
-});
+   });
 bankWire.addEventListener('change', function(){
     selectPayment(false, true, 'Transferencia bancaria');
-    checked = true;
-});
+   });
