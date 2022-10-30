@@ -36,6 +36,9 @@ function showCartContent(){
         inputCount.setAttribute(`value`, item.count);
         
         inputCount.addEventListener('input', function(){
+            if(inputCount.value<0){
+                inputCount.value = 1;
+            }
             document.getElementById('sub-'+item.id).innerHTML = 'USD ' + calcSubtotal(item.currency, item.unitCost, inputCount.value);
             showCosts()
         })
@@ -175,6 +178,11 @@ btnPurchase.addEventListener('click', function(e){
     }
     if(premiumRate.checked || expressRate.checked || standardRate.checked){
         rateSelected = true;
+        document.getElementById('shippingNotSelected').classList.add('hidden');
+
+    }
+    if(!premiumRate.checked && !expressRate.checked && !standardRate.checked){
+        document.getElementById('shippingNotSelected').classList.remove('hidden');
     }
     if(notEmpty && checked && rateSelected){
         document.getElementById('success').classList.remove('hidden');
