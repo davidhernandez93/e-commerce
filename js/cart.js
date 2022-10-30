@@ -2,6 +2,7 @@ const cartUser = '25801.json';
 let cartContent = [];
 let itemsInCart = JSON.parse(localStorage.getItem("listOfItems"));
 let percentage = 0;
+let id;
 
 if(itemsInCart === null){
     itemsInCart = [];
@@ -12,7 +13,6 @@ fetch(CART_INFO_URL + cartUser).then(response => response.json()).then(data => {
     cartContent = cartContent.concat(itemsInCart);
     showCartContent();
     showCosts();
-    addDelete();
     selectedRate();
 });
 
@@ -28,7 +28,6 @@ function showCartContent(){
             <td><span class='subSpan' id='sub-${item.id}'>USD ${conversion(item.currency, item.unitCost)}</span></td>
             `
         document.getElementById('tableBody').appendChild(tRow);
-        
         let inputCount = document.createElement('input');
         inputCount.setAttribute(`class`, `form-control inputQuantity`);
         inputCount.setAttribute(`type`, `number`);
@@ -43,7 +42,30 @@ function showCartContent(){
             showCosts()
         })
         document.getElementById(`count-${item.id}`).appendChild(inputCount);
+
+
+        let tdDelete = document.createElement('td');
+        tdDelete.setAttribute(`class`, `text-center`)
+        let btnDelete = document.createElement('button');
+        btnDelete.setAttribute(`class`,`btn btn-danger`)
+        btnDelete.innerHTML=`
+            <i class="fa fa-trash" aria-hidden="true"></i>
+        `;
+
+        btnDelete.addEventListener('click', function(){
+            let itemIndex = cartContent.indexOf(item);
+            cartContent.splice(itemIndex, 1);
+            localStorage.setItem("listOfItems", JSON.stringify(cartContent));
+            console.log(cartContent);
+            this.parentElement.parentElement.remove();
+            showCosts();
+
+        })
+        tdDelete.appendChild(btnDelete);
+        tRow.appendChild(tdDelete);
+
     }
+    
 }
 
 function conversion (currency, cost){
@@ -110,25 +132,7 @@ function selectedRate (){
 }
 
 function addDelete(){
-
-    let row = document.getElementsByClassName('tRow');
-    for(let i = 0; i<row.length; i++){
-        let tdDelete = document.createElement('td');
-        tdDelete.setAttribute(`class`, `text-center`)
-        let btnDelete = document.createElement('button');
-        btnDelete.setAttribute(`class`,`btn btn-danger`)
-        btnDelete.innerHTML=`
-            <i class="fa fa-trash" aria-hidden="true"></i>
-        `;
-        btnDelete.addEventListener('click', function(){
-            console.log(itemsInCart);
-            // delete itemsInCart[0];
-            // this.parentElement.parentElement.remove()
-        })
-        tdDelete.appendChild(btnDelete);
-
-        row[i].append(tdDelete)
-    }
+    
 }
 function openModal(){
     document.getElementById('modalLink').addEventListener('click', function(){
