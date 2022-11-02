@@ -8,8 +8,8 @@ document.addEventListener('DOMContentLoaded', function(){
     submitButton.addEventListener('click', function(event){
         if(mailInput.value !='' && pwInput.value !=''){
 
-            localStorage.setItem('nombre', mailInput.value);
-            nombreLogin = localStorage.getItem('nombre');
+            localStorage.setItem('email', mailInput.value);
+            nombreLogin = localStorage.getItem('email');
             location.replace('index.html');
             event.preventDefault();
 

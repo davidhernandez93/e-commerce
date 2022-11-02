@@ -1,4 +1,4 @@
-const cartUser = '25801.json';
+    const cartUser = '25801.json';
 let cartContent = [];
 let itemsInCart = JSON.parse(localStorage.getItem("listOfItems"));
 let percentage = 0;

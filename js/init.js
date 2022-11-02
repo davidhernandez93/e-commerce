@@ -15,11 +15,11 @@ var nombreUserNavBar = '';
 //Valida si el hay en el localStorage hay un objeto con el nombre de usuario. Si no lo hay redirige a la pagina de login.
 function validarUserLogeado(){
 
-  userName = localStorage.getItem('nombre');
+  userName = localStorage.getItem('email');
   if(userName === null){
   
     location.replace('login.html');
-    userName = localStorage.setItem('nombre', mailInput.value);
+    userName = localStorage.setItem('email', mailInput.value);
   
   }
 
@@ -31,7 +31,7 @@ validarUserLogeado();
 function nombreNavBar(){
 
   nombreUserNavBar = document.getElementById("nombreUser");
-  nombreUser.innerText = localStorage.getItem('nombre');
+  nombreUser.innerText = localStorage.getItem('email');
 
 }
 nombreNavBar();
