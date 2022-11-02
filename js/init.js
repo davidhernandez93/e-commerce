@@ -39,7 +39,7 @@ nombreNavBar();
 
 function cerrarSesion (){
 
-  localStorage.setItem('nombre', '');
+  localStorage.setItem('email', '');
   location.replace('login.html');
 
 }

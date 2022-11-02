@@ -263,7 +263,7 @@ function selectPayment(option1, option2, text){
 }
 credit.addEventListener('change', function(){
     selectPayment(true, false, 'Tarjeta de Crédito');
-   });
+});
 bankWire.addEventListener('change', function(){
     selectPayment(false, true, 'Transferencia bancaria');
-   });
+});

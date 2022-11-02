@@ -122,7 +122,7 @@ let form = document.getElementById('form');
 let formBtn = document.getElementById('formBtn')
 let formCommentBox = document.getElementById('comment');
 let formScore = document.getElementById('score');
-let nombre = localStorage.getItem('nombre');
+let nombre = localStorage.getItem('email');
 let commentOfUser = JSON.parse(localStorage.getItem("listOfComments"));
 let newComment ='';
 
