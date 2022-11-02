@@ -11,7 +11,6 @@ let contactPhone = document.getElementById('contactPhone');
 // muestra el mail del login.
 mail.value = localStorage.getItem('email')
 
-
 // Validacion al submitear el form
 formProfile.addEventListener('submit', function (event) {
     
@@ -42,11 +41,9 @@ contactPhone.addEventListener('input', function(e){
     }
 })
 
-
 // Guardado de datos en localStorage
-
 function setProfileInfo(){
-    
+
     let profileInfo = {
         stName : firstName.value,
         ndName : secondName.value,
